@@ -5,10 +5,10 @@
             <label class="form-label">Title</label>
             <select formControlName="title" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
                 <option value=""></option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
+                <option value="Mr. ">Mr</option>
+                <option value="Mrs. ">Mrs</option>
+                <option value="Miss. ">Miss</option>
+                <option value="Ms. ">Ms</option>
             </select>
             <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                 <div *ngIf="f.title.errors.required">Title is required</div>
@@ -49,6 +49,16 @@
                 <div *ngIf="f.role.errors.required">Role is required</div>
             </div>
         </div>
+        <div class="mb-3 col-2">
+            <label class="form-label">Status</label>
+            <select formControlName="status" class="form-select" [(ngModel)]="selectedStatus" name="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option value="Enabled">Enabled</option>
+                <option value="Disabled">Disabled</option>
+            </select>
+            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                <div *ngIf="f.status.errors.required">Title is required</div>
+            </div>
+        </div>
     </div>
     <div *ngIf="id">
         <h3 class="pt-3">Change Password</h3>
@@ -82,4 +92,4 @@
 </form>
 <div *ngIf="loading" class="text-center m-5">
     <span class="spinner-border spinner-border-lg align-center"></span>
-</div>
+</div> 

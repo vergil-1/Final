@@ -5,12 +5,15 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
 import { MustMatch } from '@app/_helpers';
+import { Account } from '@app/_models';
 
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form!: FormGroup;
     id?: string;
     title!: string;
+    selectedStatus?: string;
+    accounts: Account[] = [];
     loading = false;
     submitting = false;
     submitted = false;
@@ -32,6 +35,7 @@ export class AddEditComponent implements OnInit {
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             role: ['', Validators.required],
+            status: ['', Validators.required],
             // password only required in add mode
             password: ['', [Validators.minLength(6), ...(!this.id ? [Validators.required] : [])]],
             confirmPassword: ['']
@@ -57,6 +61,11 @@ export class AddEditComponent implements OnInit {
     get f() { return this.form.controls; }
 
     onSubmit() {
+        const newAcc: Account = {
+            status: this.selectedStatus,
+        };
+        this.accounts.push(newAcc);
+        
         this.submitted = true;
 
         // reset alerts on submit
